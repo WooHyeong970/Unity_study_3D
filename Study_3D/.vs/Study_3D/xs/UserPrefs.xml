@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{75458E3E-A04A-9B4F-3FD4-2D33365ED7BD}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Goldmetal_3DQuarterView/Scripts/Item.cs">
     <Files>
-      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs" Line="65" Column="10" />
-      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs" Line="15" Column="67" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs" Line="72" Column="12" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Item.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +12,7 @@
             <Node name="Assets" expanded="True">
               <Node name="Goldmetal_3DQuarterView" expanded="True">
                 <Node name="Scripts" expanded="True">
-                  <Node name="Player.cs" selected="True" />
+                  <Node name="Item.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -22,7 +23,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="4b0fc2d6-83a6-4051-baee-70fe243519b3" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e0ce901f-5b85-4b74-bd13-12db0f88f9d2" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

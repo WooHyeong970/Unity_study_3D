@@ -58,11 +58,18 @@ public class Player : MonoBehaviour
         // hAxis와 vAxis로 새로운 벡터를 만들고 normalized해준다
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        if(isDodge) // 만약 지금 회피중이라면
+        //if(isDodge) // 만약 지금 회피중이라면
+        //{
+        //    // moveVec은 무조건 dodgeVector방향으로 전환
+        //    moveVec = dodgeVector;
+        //}
+
+
+        if(!isDodge)
         {
-            // moveVec은 무조건 dodgeVector방향으로 전환
-            moveVec = dodgeVector;
+            moveVec = new Vector3(hAxis, 0, vAxis);
         }
+
 
         // 오브젝트의 position값에 moveVec과 속, deltaTime을 곱한 값을 더해준다
         // 걷기일때에는 0.3을 곱한다
@@ -70,6 +77,7 @@ public class Player : MonoBehaviour
 
         // moveVec이 zero가 아니라면 animation "isRun"을 실행한다
         animator.SetBool("isRun", moveVec != Vector3.zero);
+
         // wDown이 true라면 animation "isWalk"를 실행한다
         animator.SetBool("isWalk", wDown);
     }
@@ -87,9 +95,11 @@ public class Player : MonoBehaviour
         {
             // Vector.up방향으로 AddForce시키고
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+
             // isJump animation실행
             animator.SetBool("isJump", true);
             animator.SetTrigger("doJump");
+
             // 연속 점프 방지를 위한 변수
             isJump = true;
         }
