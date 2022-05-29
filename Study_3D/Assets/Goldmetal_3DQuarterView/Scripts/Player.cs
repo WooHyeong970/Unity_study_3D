@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
     float dSpeed; // 회피할 때 스피드
     float offsetSpeed; // 원래 스피드
 
@@ -12,9 +14,14 @@ public class Player : MonoBehaviour
     float vAxis;
     bool wDown;
     bool jDown;
+    bool iDown;
+    bool sDown1;
+    bool sDown2;
+    bool sDown3;
 
     bool isJump;
     bool isDodge;
+    bool isSwap;
 
     Vector3 moveVec;
     // 점프 혹은 dodge를 할 때의 방향벡터
@@ -22,6 +29,9 @@ public class Player : MonoBehaviour
 
     Rigidbody rigid;
     Animator animator;
+
+    GameObject nearObject;
+    GameObject equipWeapon;
 
     private void Awake()
     {
@@ -40,6 +50,8 @@ public class Player : MonoBehaviour
         Turn();
         Jump();
         Dodge();
+        Swap();
+        Interaction();
     }
 
     // 플레이어 Movement
@@ -48,9 +60,12 @@ public class Player : MonoBehaviour
     {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-        // left shift를 눌러서 Walk가 활성화 된다면 1을 반환
         wDown = Input.GetButton("Walk");
         jDown = Input.GetButtonDown("Jump");
+        iDown = Input.GetButtonDown("Interaction");
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
+        sDown3 = Input.GetButtonDown("Swap3");
     }
 
     void Move()
@@ -58,17 +73,18 @@ public class Player : MonoBehaviour
         // hAxis와 vAxis로 새로운 벡터를 만들고 normalized해준다
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        //if(isDodge) // 만약 지금 회피중이라면
-        //{
-        //    // moveVec은 무조건 dodgeVector방향으로 전환
-        //    moveVec = dodgeVector;
-        //}
-
-
-        if(!isDodge)
+        if(isDodge) // 만약 지금 회피중이라면
         {
-            moveVec = new Vector3(hAxis, 0, vAxis);
+            // moveVec은 무조건 dodgeVector방향으로 전환
+            moveVec = dodgeVector;
         }
+
+
+        // ** 참고 **
+        //if(isDodge)
+        //{
+        //    moveVec = new Vector3(hAxis, 0, vAxis);
+        //}
 
 
         // 오브젝트의 position값에 moveVec과 속, deltaTime을 곱한 값을 더해준다
@@ -119,6 +135,53 @@ public class Player : MonoBehaviour
             Invoke("DodgeOut", 0.4f);
         }
     }
+
+    void Swap()
+    {
+        int weaponIndex = -1;
+        if (sDown1)
+        {
+            if (hasWeapons[0] == false) return;
+            weaponIndex = 0;
+        }
+        if (sDown2)
+        {
+            if (hasWeapons[1] == false) return;
+            weaponIndex = 1;
+        }
+        if (sDown3)
+        {
+            if (hasWeapons[2] == false) return;
+            weaponIndex = 2;
+        }
+        if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge)
+        {
+            if(equipWeapon != null)
+                equipWeapon.SetActive(false);
+            equipWeapon = weapons[weaponIndex];
+            equipWeapon.SetActive(true);
+
+            animator.SetTrigger("doSwap");
+            isSwap = true;
+
+            Invoke("SwapOut", 0.4f);
+        }
+    }
+
+    void Interaction()
+    {
+        if(iDown && nearObject != null && !isJump && !isDodge)
+        {
+            if(nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+
+                Destroy(nearObject);
+            }
+        }
+    }
     #endregion
 
     private void OnCollisionEnter(Collision collision)
@@ -136,5 +199,28 @@ public class Player : MonoBehaviour
     {
         speed = offsetSpeed;
         isDodge = false;
+    }
+
+    void SwapOut()
+    {
+        isSwap = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Weapon")
+        {
+            nearObject = other.gameObject;
+        }
+
+        Debug.Log(nearObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Weapon")
+        {
+            nearObject = null;
+        }
     }
 }
