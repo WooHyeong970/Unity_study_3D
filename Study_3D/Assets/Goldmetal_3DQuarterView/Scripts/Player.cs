@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     GameObject nearObject;
     GameObject equipWeapon;
+    int equipWeaponIndex = -1;
 
     private void Awake()
     {
@@ -79,6 +80,11 @@ public class Player : MonoBehaviour
             moveVec = dodgeVector;
         }
 
+        if(isSwap)
+        {
+            moveVec = Vector3.zero;
+        }
+
 
         // ** 참고 **
         //if(isDodge)
@@ -107,7 +113,7 @@ public class Player : MonoBehaviour
     void Jump()
     {
         // 점프키를 눌렀고 점프상태가 아니라면
-        if(jDown && !isJump && !isDodge && moveVec == Vector3.zero)
+        if(jDown && !isJump && !isDodge && !isSwap && moveVec == Vector3.zero)
         {
             // Vector.up방향으로 AddForce시키고
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
@@ -123,7 +129,7 @@ public class Player : MonoBehaviour
 
     void Dodge()
     {
-        if (jDown && !isJump && !isDodge && moveVec != Vector3.zero)
+        if (jDown && !isJump && !isDodge && !isSwap && moveVec != Vector3.zero)
         {
             // 닷지할 때 방향을 dodgeVector에 저장
             dodgeVector = moveVec;
@@ -141,23 +147,25 @@ public class Player : MonoBehaviour
         int weaponIndex = -1;
         if (sDown1)
         {
-            if (hasWeapons[0] == false) return;
+            if (hasWeapons[0] == false || equipWeaponIndex == 0) return;
             weaponIndex = 0;
         }
         if (sDown2)
         {
-            if (hasWeapons[1] == false) return;
+            if (hasWeapons[1] == false || equipWeaponIndex == 1) return;
             weaponIndex = 1;
         }
         if (sDown3)
         {
-            if (hasWeapons[2] == false) return;
+            if (hasWeapons[2] == false || equipWeaponIndex == 2) return;
             weaponIndex = 2;
         }
         if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge)
         {
             if(equipWeapon != null)
                 equipWeapon.SetActive(false);
+
+            equipWeaponIndex = weaponIndex;
             equipWeapon = weapons[weaponIndex];
             equipWeapon.SetActive(true);
 
