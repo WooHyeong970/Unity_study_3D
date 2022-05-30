@@ -352,6 +352,7 @@
 "Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Item.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Player.cs"
+"Assets/shorts/MeshCreator/MeshCreate.cs"
 -langversion:9.0
 
 /deterministic

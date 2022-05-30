@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Goldmetal_3DQuarterView/Scenes/SampleScene.unity
+- path: Assets/shorts/MeshCreator/Sample.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
