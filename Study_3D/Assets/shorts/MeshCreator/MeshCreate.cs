@@ -23,10 +23,11 @@ public class MeshCreate : MonoBehaviour
         Vector2[] uvs = new Vector2[] { new Vector2(0f, 1f),
                                     new Vector2(1f, 1f),
                                     new Vector2(1f, 0f),
-                                    new Vector2(0f, 0f)};
+                                    new Vector2(0f, 0f) };
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;

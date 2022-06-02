@@ -351,6 +351,7 @@
 "Assets/Goldmetal_3DQuarterView/Asset_QuarterView 3D Action BE5/ReadMe/Scripts/ReadmeBE5.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Item.cs"
+"Assets/Goldmetal_3DQuarterView/Scripts/Orbit.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Player.cs"
 "Assets/shorts/MeshCreator/MeshCreate.cs"
 -langversion:9.0

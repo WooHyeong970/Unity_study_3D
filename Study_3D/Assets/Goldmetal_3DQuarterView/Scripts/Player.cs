@@ -7,8 +7,20 @@ public class Player : MonoBehaviour
     public float speed;
     public GameObject[] weapons;
     public bool[] hasWeapons;
+    public GameObject[] grenades;
+    public int hasGrenades;
     float dSpeed; // 회피할 때 스피드
     float offsetSpeed; // 원래 스피드
+
+    public int ammo;
+    public int coin;
+    public int health;
+    public int hasGrenade;
+
+    public int maxAmmo;
+    public int maxCoin;
+    public int maxHealth;
+    public int maxHasGrenade;
 
     float hAxis;
     float vAxis;
@@ -212,6 +224,39 @@ public class Player : MonoBehaviour
     void SwapOut()
     {
         isSwap = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch(item.type)
+            {
+                case Item.Type.Ammo:
+                    ammo += item.value;
+                    if (ammo > maxAmmo)
+                        ammo = maxAmmo;
+                    break;
+                case Item.Type.Coin:
+                    coin += item.value;
+                    if (coin > maxCoin)
+                        coin = maxCoin;
+                    break;
+                case Item.Type.Heart:
+                    health += item.value;
+                    if (health > maxHealth)
+                        health = maxHealth;
+                    break;
+                case Item.Type.Grenade:
+                    grenades[hasGrenade].SetActive(true);
+                    hasGrenade += item.value;
+                    if (hasGrenade > maxHasGrenade)
+                        hasGrenade = maxHasGrenade;
+                    break;
+            }
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
