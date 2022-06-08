@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool wDown;
     bool jDown;
+    bool fDown;
     bool iDown;
     bool sDown1;
     bool sDown2;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
     bool isSwap;
+    bool isFireReady = true;
 
     Vector3 moveVec;
     // 점프 혹은 dodge를 할 때의 방향벡터
@@ -43,8 +45,9 @@ public class Player : MonoBehaviour
     Animator animator;
 
     GameObject nearObject;
-    GameObject equipWeapon;
+    Weapon equipWeapon;
     int equipWeaponIndex = -1;
+    float fireDelay;
 
     private void Awake()
     {
@@ -62,6 +65,7 @@ public class Player : MonoBehaviour
         Move();
         Turn();
         Jump();
+        Attack();
         Dodge();
         Swap();
         Interaction();
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         wDown = Input.GetButton("Walk");
         jDown = Input.GetButtonDown("Jump");
+        fDown = Input.GetButtonDown("Fire1");
         iDown = Input.GetButtonDown("Interaction");
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
@@ -92,7 +97,7 @@ public class Player : MonoBehaviour
             moveVec = dodgeVector;
         }
 
-        if(isSwap)
+        if(isSwap || !isFireReady)
         {
             moveVec = Vector3.zero;
         }
@@ -175,11 +180,11 @@ public class Player : MonoBehaviour
         if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge)
         {
             if(equipWeapon != null)
-                equipWeapon.SetActive(false);
+                equipWeapon.gameObject.SetActive(false);
 
             equipWeaponIndex = weaponIndex;
-            equipWeapon = weapons[weaponIndex];
-            equipWeapon.SetActive(true);
+            equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
+            equipWeapon.gameObject.SetActive(true);
 
             animator.SetTrigger("doSwap");
             isSwap = true;
@@ -200,6 +205,22 @@ public class Player : MonoBehaviour
 
                 Destroy(nearObject);
             }
+        }
+    }
+
+    void Attack()
+    {
+        if (equipWeapon == null)
+            return;
+
+        fireDelay += Time.deltaTime;
+        isFireReady = equipWeapon.rate < fireDelay;
+
+        if(fDown && isFireReady && !isDodge && !isSwap && !isJump)
+        {
+            equipWeapon.Use();
+            animator.SetTrigger("doSwing");
+            fireDelay = 0;
         }
     }
     #endregion
@@ -265,8 +286,6 @@ public class Player : MonoBehaviour
         {
             nearObject = other.gameObject;
         }
-
-        Debug.Log(nearObject.name);
     }
 
     private void OnTriggerExit(Collider other)

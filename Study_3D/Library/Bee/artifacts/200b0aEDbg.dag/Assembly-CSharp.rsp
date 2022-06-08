@@ -353,6 +353,7 @@
 "Assets/Goldmetal_3DQuarterView/Scripts/Item.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Orbit.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Player.cs"
+"Assets/Goldmetal_3DQuarterView/Scripts/Weapon.cs"
 "Assets/shorts/MeshCreator/MeshCreate.cs"
 -langversion:9.0
 
