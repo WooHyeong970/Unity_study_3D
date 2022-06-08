@@ -349,6 +349,7 @@
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/Goldmetal_3DQuarterView/Asset_QuarterView 3D Action BE5/ReadMe/Scripts/ReadmeBE5.cs"
+"Assets/Goldmetal_3DQuarterView/Scripts/Bullet.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Item.cs"
 "Assets/Goldmetal_3DQuarterView/Scripts/Orbit.cs"

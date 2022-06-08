@@ -58,11 +58,12 @@
   <ItemGroup>
     <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs" />
     <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs" />
+    <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Weapon.cs" />
     <Compile Include="Assets/shorts/MeshCreator/MeshCreate.cs" />
     <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Item.cs" />
     <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Orbit.cs" />
     <Compile Include="Assets/Goldmetal_3DQuarterView/Asset_QuarterView 3D Action BE5/ReadMe/Scripts/ReadmeBE5.cs" />
-    <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Weapon.cs" />
+    <Compile Include="Assets/Goldmetal_3DQuarterView/Scripts/Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
