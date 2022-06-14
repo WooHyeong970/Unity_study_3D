@@ -3,10 +3,10 @@
     <Files>
       <File FileName="Assets/shorts/MeshCreator/MeshCreate.cs" Line="36" Column="29" />
       <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Follow.cs" />
-      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Item.cs" Line="1" Column="1" />
-      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs" Line="140" Column="44" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Item.cs" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Player.cs" Line="237" Column="37" />
       <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Orbit.cs" />
-      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Weapon.cs" Line="61" Column="70" />
+      <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Weapon.cs" />
       <File FileName="Assets/Goldmetal_3DQuarterView/Scripts/Bullet.cs" Line="17" Column="33" />
     </Files>
     <Pads>
@@ -30,7 +30,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c4f0f796-bb7c-45ec-a74a-8959fae39268" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3eaea8d6-069a-4f85-9ab0-2f023d88beb7" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

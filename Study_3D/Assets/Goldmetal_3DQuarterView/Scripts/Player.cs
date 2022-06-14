@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     bool isSwap;
     bool isReload;
     bool isFireReady = true;
+    bool isBorder;
 
     Vector3 moveVec;
     // 점프 혹은 dodge를 할 때의 방향벡터
@@ -117,7 +118,8 @@ public class Player : MonoBehaviour
 
         // 오브젝트의 position값에 moveVec과 속, deltaTime을 곱한 값을 더해준다
         // 걷기일때에는 0.3을 곱한다
-        transform.position += moveVec * speed * (wDown ? 0.3f : 1.0f) * Time.deltaTime;
+        if(!isBorder)
+            transform.position += moveVec * speed * (wDown ? 0.3f : 1.0f) * Time.deltaTime;
 
         // moveVec이 zero가 아니라면 animation "isRun"을 실행한다
         animator.SetBool("isRun", moveVec != Vector3.zero);
@@ -264,6 +266,23 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
+
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+
+    void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
+        isBorder = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("Wall"));
+    }
+
+    private void FixedUpdate()
+    {
+        FreezeRotation();
+        StopToWall();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
